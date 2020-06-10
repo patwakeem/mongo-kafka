@@ -118,6 +118,11 @@ public class MongoSinkTopicConfig extends AbstractConfig {
     private static final String VALUE_PROJECTION_LIST_DOC = "A comma separated list of field names for value projection";
     private static final String VALUE_PROJECTION_LIST_DEFAULT = "";
 
+    public static final String UUID_TRANSFORMER_CONFIG = "field.uuid.transformer";
+    private static final String UUID_TRANSFORMER_DISPLAY = "String fields to transform to UUID objects";
+    private static final String UUID_TRANSFORMER_DOC = "A comma separated list of field names to transform to UUIDs";
+    private static final String UUID_TRANSFORMER_DEFAULT = "";
+
     public static final String FIELD_RENAMER_MAPPING_CONFIG = "field.renamer.mapping";
     private static final String FIELD_RENAMER_MAPPING_DISPLAY = "The field renamer mapping";
     private static final String FIELD_RENAMER_MAPPING_DOC = "An inline JSON array with objects describing field name mappings.\n"
@@ -537,6 +542,16 @@ public class MongoSinkTopicConfig extends AbstractConfig {
                 ConfigDef.Width.MEDIUM,
                 VALUE_PROJECTION_LIST_DISPLAY,
                 singletonList(VALUE_PROJECTION_TYPE_CONFIG));
+        configDef.define(UUID_TRANSFORMER_CONFIG,
+                ConfigDef.Type.STRING,
+                UUID_TRANSFORMER_DEFAULT,
+                Validators.nonEmptyString(),
+                ConfigDef.Importance.LOW,
+                UUID_TRANSFORMER_DOC,
+                group,
+                ++orderInGroup,
+                ConfigDef.Width.MEDIUM,
+                UUID_TRANSFORMER_DISPLAY);
         configDef.define(FIELD_RENAMER_MAPPING_CONFIG,
                 ConfigDef.Type.STRING,
                 FIELD_RENAMER_MAPPING_DEFAULT,
